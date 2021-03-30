@@ -1,13 +1,21 @@
-var map = new GMaps({
-  el: '#map',
-  lat:  40.730610,
-  lng: -73.935242
-});
+var map;
 
-map.addMarker({
-  lat: 40.700610,
-  lng: -73.997242,
-  title: 'New York'
-});
+function initialize() {
+    var myLatlng1 = new google.maps.LatLng(53.65914, 0.072050);
 
-map.setZoom(8);
+    var mapOptions = {
+        zoom: 10,
+        center: myLatlng1,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById('map'),
+    mapOptions);
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            map.setCenter(initialLocation);
+        });
+    }
+}
+initialize();
