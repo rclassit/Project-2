@@ -8,6 +8,36 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
   <link rel="stylesheet" href="static/css/style.css">
+  <!---BAC Calc-->
+  <SCRIPT LANGUAGE="JavaScript">
+
+    
+
+    function solveBAC(form) {
+    var ounces = eval(form.ounces.value);
+    var percent = eval(form.percent.value);
+    var weight = eval(form.weight.value);
+    var hours = eval(form.hours.value);
+    
+    var result = (ounces * percent * 0.075 / weight) - (hours * 0.015);
+    if (result < 0) {
+    message = "There is a negligible amount of alcohol in your system.  You are not legally intoxicated.";
+    result = "-- neglible amount --";
+    }
+    else {
+    if (result == "NaN")
+    mesage = "Please try again."; 
+    if (result > 0.08) 
+    message = "In MOST and possibly ALL states you would be considered intoxicated and arrested for DUI.";
+    if (result < 0.08)
+    message = "You are not legally intoxicated";
+    }
+    form.message.value = message;
+    form.bacamount.value = result + " %";
+    }
+    //  End -->
+    </script>
+    </HEAD>
 </head>
 
 <body>
@@ -46,29 +76,82 @@
             </div>
           </aside>
         </div>
-        
-        <div class="col-md-2">
-            <aside class="filters">
-              <div class="panel panel-default">
-                <div class="panel-heading">BAC Calculator</div>
-                <div class="panel-body">
-                  <form>
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <select type="button" class="form-control btn btn-success" data-toggle="dropdown">
-                          <option href="#" class="dropdown-item">Drink</option>
-                      </select>
-                    </div>
-                    
-                      <input type="text" id="input" class="form-control" placeholder="Enter Here">
-                    </div>
-                  </form>
-                    <button id="filter-btn" type="button" class="btn btn-default">Enter</button>
-                </div>
-              </div>
-            </aside>
-          </div>
-         
+          <!--BAC Table-->
+          <table>
+            <tr><td>
+            <ul>
+            <li>FLUID OUNCES CONSUMED<br>
+            (Beer ~ 12 oz. Wine Glass  ~ 4 oz.  1 Shot ~ 1.5 oz)</li>
+            <li>YOUR WEIGHT (Lbs)</li>
+            <li>ALCOHOL PERCENTAGE IN BEVERAGE<br>
+            (Beer ~ 4-4.5%  Wine ~ 15-20%  1 Shot ~ 30-50%)</li>
+            <li>HOURS CONSUMING DRINK</li>
+            </ul>
+            </td>
+            </tr>
+            </table>
+            
+            <form method=post name=bacform>
+            <table border=4>
+            <tr>
+            <td align=center>
+            Fluid Ounces Consumed
+            </td>
+            <td align=center>
+            <input type=text name=ounces size=6>
+            </td>
+            <td align=center>
+            Percent Alcohol
+            </td>
+            <td align=center>
+            <input type=text name=percent size=6>
+            </td>
+            </tr>
+            <tr>
+            <td align=center>
+            Your Weight (Lbs)
+            </td>
+            <td align=center>
+            <input type=text name=weight size=6>
+            </td>
+            <td align=center>
+            Hours Consuming Drink
+            </td>
+            <td align=center>
+            <input type=text name=hours size=6>
+            </td>
+            </tr>
+            <tr>
+            <td colspan=4 align=center>
+            <input type=button name=bac value="Calculate Your BAC %" onClick="javascript:solveBAC(this.form)">
+            </td>
+            </tr>
+            <tr>
+            <td align=center>
+            BAC Percentage
+            </td>
+            <td colspan=3 align=center>
+            <input type=text name=bacamount size=21>
+            </td>
+            </tr>
+            <tr>
+            <td align=center>
+            BAC Analysis
+            </td>
+            <td colspan=3 align=center>
+            <textarea name=message rows=3 cols=35 wrap=virtual></textarea>
+            </td>
+            </tr>
+            </table>
+            </form>
+            </center>
+            
+            <p><center>
+            <font face="arial, helvetica" size="-2">Free JavaScripts provided<br>
+            by <a href="http://javascriptsource.com">The JavaScript Source</a></font>
+            </center><p>
+            
+            <!-- Script Size:  2.67 KB -->
         <!--Drink information and Calculations-->
         <div class="col-md-5">
           <div id="table-area" class="">
@@ -85,12 +168,15 @@
             </table>
           </div>
         </div>
+        <!--Gmap-->
         <div id="map" style="width: 500px; height: 400px;"></div>
         <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
     <footer class="footer">
       <span class="bottom">Team 3</span>
     </footer>
   </div>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXdVDT_LFiZdRiQk-hwbroLTNRfu6PO0w&libraries=places&callback=initMap"></script>>
   <script src="http://maps.google.com/maps/api/js?key=AIzaSyAXdVDT_LFiZdRiQk-hwbroLTNRfu6PO0w"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.25/gmaps.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js"></script>
