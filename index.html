@@ -76,85 +76,88 @@
           </aside>
         </div>
         <!--BAC Table-->
-        <table>
-          <tr>
-            <td>
-              <ul>
-                <li>FLUID OUNCES CONSUMED<br>
-                  (Beer ~ 12 oz. Wine Glass ~ 4 oz. 1 Shot ~ 1.5 oz)</li>
-                <li>YOUR WEIGHT (Lbs)</li>
-                <li>ALCOHOL PERCENTAGE IN BEVERAGE<br>
-                  (Beer ~ 4-4.5% Wine ~ 15-20% 1 Shot ~ 30-50%)</li>
-                <li>HOURS CONSUMING DRINK</li>
-              </ul>
-            </td>
-          </tr>
-        </table>
-
-        <form method=post name=bacform>
-          <table border=4>
+        <div class="col-md-3">
+          <table>
             <tr>
-              <td align=center>
-                Fluid Ounces Consumed
-              </td>
-              <td align=center>
-                <input type=text name=ounces size=6>
-              </td>
-              <td align=center>
-                Percent Alcohol
-              </td>
-              <td align=center>
-                <input type=text name=percent size=6>
-              </td>
-            </tr>
-            <tr>
-              <td align=center>
-                Your Weight (Lbs)
-              </td>
-              <td align=center>
-                <input type=text name=weight size=6>
-              </td>
-              <td align=center>
-                Hours Consuming Drink
-              </td>
-              <td align=center>
-                <input type=text name=hours size=6>
-              </td>
-            </tr>
-            <tr>
-              <td colspan=4 align=center>
-                <input type=button name=bac value="Calculate Your BAC %" onClick="javascript:solveBAC(this.form)">
-              </td>
-            </tr>
-            <tr>
-              <td align=center>
-                BAC Percentage
-              </td>
-              <td colspan=3 align=center>
-                <input type=text name=bacamount size=21>
-              </td>
-            </tr>
-            <tr>
-              <td align=center>
-                BAC Analysis
-              </td>
-              <td colspan=3 align=center>
-                <textarea name=message rows=3 cols=35 wrap=virtual></textarea>
+              <td>
+                <ul>
+                  <li>FLUID OUNCES CONSUMED<br>
+                    (Beer ~ 12 oz. Wine Glass ~ 4 oz. 1 Shot ~ 1.5 oz)</li>
+                  <li>YOUR WEIGHT (Lbs)</li>
+                  <li>ALCOHOL PERCENTAGE IN BEVERAGE<br>
+                    (Beer ~ 4-4.5% Wine ~ 15-20% 1 Shot ~ 30-50%)</li>
+                  <li>HOURS CONSUMING DRINK</li>
+                </ul>
               </td>
             </tr>
           </table>
-        </form>
-
-        <p>
-          <center>
-            <font face="arial, helvetica" size="-2">Free JavaScripts provided<br>
-              by <a href="http://javascriptsource.com">The JavaScript Source</a></font>
-          </center>
-        </p>
-
+          <form method=post name=bacform>
+            <table border=4>
+              <tr>
+                <td align=center>
+                  Fluid Ounces Consumed
+                </td>
+                <td align=center>
+                  <input type=text name=ounces size=6>
+                </td>
+                <td align=center>
+                  Percent Alcohol
+                </td>
+                <td align=center>
+                  <input type=text name=percent size=6>
+                </td>
+              </tr>
+              <tr>
+                <td align=center>
+                  Your Weight (Lbs)
+                </td>
+                <td align=center>
+                  <input type=text name=weight size=6>
+                </td>
+                <td align=center>
+                  Hours Consuming Drink
+                </td>
+                <td align=center>
+                  <input type=text name=hours size=6>
+                </td>
+              </tr>
+              <tr>
+                <td colspan=4 align=center>
+                  <input type=button name=bac value="Calculate Your BAC %" onClick="javascript:solveBAC(this.form)">
+                </td>
+              </tr>
+              <tr>
+                <td align=center>
+                  BAC Percentage
+                </td>
+                <td colspan=3 align=center>
+                  <input type=text name=bacamount size=21>
+                </td>
+              </tr>
+              <tr>
+                <td align=center>
+                  BAC Analysis
+                </td>
+                <td colspan=3 align=center>
+                  <textarea name=message rows=3 cols=35 wrap=virtual></textarea>
+                </td>
+              </tr>
+            </table>
+          </form>
+  
+          <p>
+            <center>
+              <font face="arial, helvetica" size="-2">Free JavaScripts provided<br>
+                by <a href="http://javascriptsource.com">The JavaScript Source</a></font>
+            </center>
+          </p>
+  
+        </div>
+        
+        
 
         <!--Drink information and Calculations-->
-        <div class="col-md-5">
+        <div class="col-md-4">
           <div id="table-area" class="">
             <table id="drink-table" class="table table-striped">
               <thead>
