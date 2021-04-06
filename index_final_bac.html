@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Project 2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/style.css">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <!---BAC Calc-->
+  <script LANGUAGE="JavaScript">
+
+      function solveBAC(form) {
+      //grab drink input
+      var drinkInput = d3.select("#drinkinput").node().value;
+      //console.log(drinkInput);
+      var drinkOutput = d3.select("#drinkOutput");
+      drinkOutput.text(drinkInput);
+
+      //filter out drink info from csv
+      d3.csv("drinks_bac.csv", function(drinks){
+        var filteredData = drinks.filter(drink => drink.strDrink === drinkInput);
+
+      // grab ABV from data 
+      var drinkABV = filteredData.map(drink => drink.Drink_ABV);
+      var ABVOutput = d3.select("#ABVOutput");
+      // put ABV in output table
+      ABVOutput.text(drinkABV+ "%");
+      console.log(drinkABV)
+
+      //get drink image from data
+      var drinkImage = filteredData.map(drink => drink.image);
+      var drink_image = document.getElementById("drinkImage");
+      // put image in output table (CORBS errors in Chrome need to be addressed)
+      drink_image.src = drinkImage;
+      console.log(drinkImage);
+
+      //grab primary liquor ingredient from data
+      //drinkLiquor should be replaced with liquor name (csv needs additional column)
+      var drinkLiquor = filteredData.map(drink => drink.idDrink);
+      var LiquorOutput = d3.select("#LiquorOutput");
+      LiquorOutput.text(drinkLiquor);
+     
+      // grab values for BAC calc from input form
+      var ounces = eval(form.ounces.value);
+      var weight = eval(form.weight.value);
+      var hours = eval(form.hours.value);
+
+      // define image elements that will change depending on BAC result
+      var image = document.getElementById("myImage");
+      var iframe = document.getElementById("map-iframe");
+      var bacamountElement = d3.select("#bacamount");
+      var messageElement = d3.select("#message");
+
+      // bac calculation
+      var result = (ounces * drinkABV * 0.075 / weight) - (hours * 0.015);
+      //console.log(result);
+      
+      // if else statement bac result comparison to known alcohol effects + gif + map
+      if (result <= 0) {
+        message = "There is a negligible amount of alcohol in your system.  You are not legally intoxicated.";
+        result = "-- neglible amount --";
+        image.src = "https://media.giphy.com/media/ky16TkGK4RTs4/giphy.gif";
+        iframe.src = "Bars.html";
+      }
+
+      else if (result == "NaN") {
+          message = "Please try again.";
+          image.src = "https://media.giphy.com/media/l2SpZMSn47KJ01g1G/giphy.gif";
+          iframe.src = "Bars.html";
+        }
+
+       else if (result > 0 && result <= 0.025){
+          message = "You are not legally intoxiated but may feel some effects";
+          image.src = "https://media.giphy.com/media/bkKwwMj347FJe/giphy.gif";
+          iframe.src = "Bars.html";
+        }
+
+       else if (result > 0.025 && result <=0.045){
+          message = "Most people begin to feel relaxed at this point, but you're not legally intoxicated";
+          image.src = "https://media.giphy.com/media/6hLODLJTkHf8c/giphy.gif";
+          iframe.src = "Bars.html";
+        }
+          
+       else if (result > 0.045 && result <= 0.065){
+          message = "Your judgment is likely impaired, but you're not legally intoxicated";
+          image.src = "https://media.giphy.com/media/FBayIVKx07DgwLzPFY/giphy.gif";
+          iframe.src = "Bus_stop.html";
+        }
+      
+       else if (result > 0.065 && result < 0.08) {
+          message = "You're at/approaching the legal limit. There's definite impairment of muscle coordination and driving skills."
+          image.src = "https://media.giphy.com/media/96jP5ZSpYxtwQ/giphy.gif";
+          iframe.src = "Bus_stop.html";
+          //console.log(result);
+        }
+
+       else if (result == 0.08){
+          message = "In MOST and possibly ALL states you would be considered intoxicated and arrested for DUI.";
+          image.src = "https://media.giphy.com/media/yoJC2NUmw6fFWD6E6I/giphy.gif";
+          iframe.src = "Bus_stop.html";
+        }
+
+       else if (result > 0.08) {
+          message = "Go home, you're drunk.";
+          image.src = "https://media.giphy.com/media/FJhQGaCZeumAw/giphy.gif";
+          iframe.src = "Bus_stop.html";
+          //console.log(result);
+        }
+
+        else {
+          //Set these to some default value
+          message = "Something went wrong. Please try again.";
+          image.src = "https://media.giphy.com/media/11NDdTESUQRkeQ/giphy.gif";
+          iframe.src = "Bars.html";
+          //console.log(result);
+        }
+
+      // write results into output table
+      messageElement.text(message);
+      bacamountElement.text(result + "%"); });}
+    
+    // https://awareawakealive.org/educate/blood-alcohol-content
+    //  End -->
+  </script>
+</head>
+
+<body>
+  <div class="wrapper">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="index.html">Go Home
+            <img class="nav-drink" src="">
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!--Input Form for Drink-->
+    <div class="container">
+      <div class="row margin-top-50">
+        <div class="col-md-3">
+          <aside class="filters">
+            <div class="panel panel-default">
+              <div class="panel-heading">What are you drinking?</div>
+              <div class="panel-body">
+                <form method=post name=bacform>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <!-- <select type="button" class="form-control btn btn-success" data-toggle="dropdown"> -->
+                      <option href="#" class="dropdown-item">Drink Name</option>
+                      </select>
+                    </div>
+                    <input type="text" id="drinkinput" name=drink class="form-control" placeholder="Margarita">
+                  </div>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <option href="#" class="dropdown-item">Ounces Consumed</option>
+                      </select>
+                    </div>
+                    <input type="text" id="input" name=ounces class="form-control" placeholder="8">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <option href="#" class="dropdown-item">Your Weight (lbs)</option>
+                      </select>
+                    </div>
+                    <input type="text" id="input" name=weight class="form-control" placeholder="180">
+                  </div>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <option href="#" class="dropdown-item">Time since last drink (hrs)</option>
+                      </select>
+                    </div>
+                    <input type="text" id="input" name=hours class="form-control" placeholder="2">
+                  </div>
+                  <button id="filter-btn" type="button" class="btn btn-default"
+                    onClick="javascript:solveBAC(this.form)">Enter</button>
+                </form>
+
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <!--Drink Output-->
+        <div class="container">
+          <div class="row margin-top-50">
+            <form method=post name=bacform>
+              <div class="col-md-2">
+                <div id="table-area" class="">
+                  <table id="bac-table" class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th class="table-head">Drink</th>
+                        <th class="table-head">ABV</th>
+                        <th class="table-head">Liquor</th>
+                        <th class="table-head">Image</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><p id="drinkOutput"></p></td>
+                        <td><p id="ABVOutput"></p></td>
+                        <td><p id="LiquorOutput"></p></td>
+                        <td><img id="drinkImage" src="https://static01.nyt.com/images/2019/05/19/magazine/19Studies_01/42ae82a8ab644d10a60cc719da368d7c-jumbo.jpg?quality=90&auto=webp" width="250"
+                            height="180"></td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+          </div>
+        </div>
+        </form>
+
+        <!--BAC Output-->
+        <div class="container">
+          <div class="row margin-top-50">
+            <div class="col-md-2">
+              <div id="table-area" class="">
+                <table id="bac-table" class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th class="table-head">BAC Percentage</th>
+                      <th class="table-head">Assessment</th>
+                      <th class="table-head">Judgement</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><p id="bacamount"></p></td>
+                      <td><p id="message"></p>
+                      </td>
+                      <td><img id="myImage" src="https://media.giphy.com/media/q6QHDGE3X4EWA/giphy.gif" width="250"
+                        height="180"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Map appears here -->
+        <div class="col-md-3">
+          <div id="panel"></div>
+          <div id="map"></div>
+          <div id="map-iframe">
+            <iframe src="Bus_stop.html" width="300" height="200"></iframe>
+          </div>
+        </div>
+      </div>
+
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js"></script>
+      <script src="static/js/data.js"></script>
+      <script src="static/js/app.js"></script>
+</body>
+
+</html>
