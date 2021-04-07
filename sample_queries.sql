@@ -15,3 +15,6 @@ where strIngredient1 like '%Cacao%'
 or strIngredient2 like '%Cacao%'
 or strIngredient3 like '%Cacao%'
 or strIngredient4 like '%Cacao%';
+
+select strDrink, strIngredient1, strMeasure1, strIngredient2, strMeasure2, strIngredient3, strMeasure3, strIngredient4, strMeasure4,Drink_ABV from cocktail_data
+where Drink_ABV = 0
