@@ -28,3 +28,5 @@ create table cocktail_data(idDrink varchar(10) primary key,
 						  );
 
 drop table cocktail_data;
+
+select * from cocktail_data
