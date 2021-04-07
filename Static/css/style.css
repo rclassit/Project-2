@@ -10,6 +10,9 @@ body {
   margin: 0;
 }
 
+
+
+
 /* The wrapper contains all of the page's content besides the footer, which is pushed to the bottom of the page */
 .wrapper {
   position: relative;
@@ -35,30 +38,25 @@ body {
   bottom: 0;
   left: 0;
   padding: 5px;
-  background: #1b3146;
+  background:azure;
 }
 
-.navbar {
-  padding: 5px;
-  margin: 0;
-}
 
-/* This CSS styles the drink icon in the navbar */
-.nav-drink {
-  position: absolute;
-  bottom: 5px;
-  left: 150px;
-  width: 35px;
-  color: white;
-}
+
 
 /* Adding styles to the aside and filter form */
 .drink-form {
   margin-top: 50px;
 }
 
+.panel-heading {
+  padding: 20; 
+  text-align:center;
+}
+
 .filters .panel-body {
-  padding: 0;
+  padding: 20;
+  text-align: center;
 }
 
 .filters {
@@ -69,7 +67,7 @@ select {
   display: block;
   width: 100%;
   padding: 8px;
-  color: #8e979f;
+  color:aquamarine;
   outline: none;
 }
 
@@ -97,7 +95,7 @@ select {
   height: 300px;
   padding: 20px;
   margin: 0;
-  background: black;
+  background:blueviolet;
   background-image: url("../images/cocktail.jpg");
   background-attachment: fixed;
   background-position: bottom center;
@@ -120,7 +118,7 @@ select {
 /* input placeholder color changes */
 .form-control::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
-  color: #8e979f;
+  color: #2ba33f;
 }
 
 .form-control::-moz-placeholder {
@@ -138,6 +136,12 @@ select {
   color: #8e979f;
 }
 
+.span12{
+  -moz-box-shadow: 0 0 2px black;
+  -webkit-box-shadow: 0 0 2px black;
+  box-shadow: 0 0 2px black;
+}
+
 /* media queries which will only be activated at specific screen sizes */
 @media (max-width: 800px) {
   #table-area td {
@@ -153,7 +157,7 @@ select {
   #table-area tr td:first-child {
     font-size: 1.8em;
     font-weight: bold;
-    background: #1b3146;
+    background:chartreuse;
   }
 
   #table-area tr td:last-child {
@@ -225,7 +229,7 @@ select {
 }
 /* MappyStyles */
 #map {
-  height: 30%;
+  height: 50%;
   background-color: grey;
 }
 
@@ -255,8 +259,10 @@ select {
 .place,
 p {
   font-family: 'open sans', arial, sans-serif;
-  padding-left: 18px;
-  padding-right: 18px;
+  font-size: 150%;
+  text-align: center;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .details {
@@ -266,4 +272,10 @@ p {
 a {
   text-decoration: none;
   color: cadetblue;
+}
+
+.span12{
+  -moz-box-shadow: 0 0 2px green;
+  -webkit-box-shadow: 0 0 2px blue;
+  box-shadow: 0 0 2px red;
 }
