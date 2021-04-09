@@ -4,20 +4,23 @@ import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
-
-from flask import Flask, jsonify
+import psycopg2 
+from flask import Flask, jsonify, request
+# from flask_cors import CORS
 
 
 #################################################
 # Database Setup
 #################################################
 
+
+
 username = 'postgres'
 password = 'password'
-rds_connection_string = f"{username}:{password}@localhost:5432/Project-2"
+rds_connection_string = f"{username}:{password}@localhost:5432/drinks"
 engine = create_engine(f'postgresql://{rds_connection_string}')
 
-# engine = create_engine("sqlite:///titanic.sqlite")
+
 
 # reflect an existing database into a new model
 Base = automap_base()
@@ -26,8 +29,6 @@ Base.prepare(engine, reflect=True)
 
 # Save reference to the table
 cocktail_data = Base.classes.cocktail_data
-spirit_totals = Base.classes.spirit_totals
-abv_table = Base.classes.abv_table
 
 #################################################
 # Flask Setup
@@ -39,64 +40,59 @@ app = Flask(__name__)
 # Flask Routes
 #################################################
 
+# @app.route("/")
+# def sample():
+#     # data = query from table
+#     data = cocktail_data
+    
+#     # returns list of dictionaries or dictionary
+#     return jsonify(data)
+
 @app.route("/")
-def sample():
-    data = cocktail_data
-    # data = query form table
-
-    # list of dictionaries or dictionary
-
-    return jsonify(data)
+def index():
+    
+    return ("index.html")
 
 
-# @app.route("/home")
-# def welcome():
-#     """List all available api routes."""
-#     return (
-#         f"Available Routes:<br/>"
-#         f"/api/v1.0/names<br/>"
-#         f"/api/v1.0/passengers"
-#     )
+@app.route("/api/v1.0/strdrink/")
+def strdrink():
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
+
+    """Return a list of all drink names"""
+    # Query all drinks
+    results = session.query(cocktail_data.strdrink).all()
+
+    session.close()
+
+    # Convert list of tuples into normal list
+    all_strdrink = list(np.ravel(results))
+
+    return jsonify(all_strdrink)
 
 
-# @app.route("/api/v1.0/names")
-# def names():
+# @app.route("/api/v1.0/strdrink")
+# def strdrink():
 #     # Create our session (link) from Python to the DB
 #     session = Session(engine)
 
-#     """Return a list of all passenger names"""
-#     # Query all passengers
-#     results = session.query(Passenger.name).all()
+#     """Return a list of drink data including the drink, abv, and firstingredient of each drink"""
+#     # Query all drinks
+   
+#     results = session.query(cocktail_data.strdrink, cocktail_data.drink_abv, cocktail_data.stringredient1).all()
 
 #     session.close()
 
-#     # Convert list of tuples into normal list
-#     all_names = list(np.ravel(results))
+#     # Create a dictionary from the row data and append to a list of all drinks
+#     all_strdrink = []
+#     for strdrink, drink_abv, stringredient1 in results:
+#         strdrink_dict = {}
+#         strdrink_dict["strdrink"] = strdrink
+#         strdrink_dict["drink_abv"] = drink_abv
+#         strdrink_dict["stringredient1"] = stringredient1
+#         all_strdrink.append(strdrink_dict)
 
-#     return jsonify(all_names)
-
-
-# @app.route("/api/v1.0/passengers")
-# def passengers():
-#     # Create our session (link) from Python to the DB
-#     session = Session(engine)
-
-#     """Return a list of passenger data including the name, age, and sex of each passenger"""
-#     # Query all passengers
-#     results = session.query(Passenger.name, Passenger.age, Passenger.sex).all()
-
-#     session.close()
-
-#     # Create a dictionary from the row data and append to a list of all_passengers
-#     all_passengers = []
-#     for name, age, sex in results:
-#         passenger_dict = {}
-#         passenger_dict["name"] = name
-#         passenger_dict["age"] = age
-#         passenger_dict["sex"] = sex
-#         all_passengers.append(passenger_dict)
-
-#     return jsonify(all_passengers)
+#     return jsonify(all_strdrink)
 
 
 if __name__ == '__main__':
