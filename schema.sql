@@ -26,7 +26,8 @@ create table cocktail_data(idDrink varchar(10) primary key,
 						   	strMeasure12 float(3),
 						    Drink_ABV float(3)
 						  );
-
-drop table cocktail_data;
-
-select * from cocktail_data
+						  
+create table spirit_totals(spirit varchar(255),
+						   total float(3)
+						  );
+						  

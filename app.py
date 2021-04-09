@@ -26,6 +26,8 @@ Base.prepare(engine, reflect=True)
 
 # Save reference to the table
 cocktail_data = Base.classes.cocktail_data
+spirit_totals = Base.classes.spirit_totals
+abv_table = Base.classes.abv_table
 
 #################################################
 # Flask Setup
