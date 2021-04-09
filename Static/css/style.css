@@ -56,7 +56,7 @@ body {
 
 .filters .panel-body {
   padding: 20;
-  text-align: center;
+  text-align: Left;
 }
 
 .filters {
@@ -143,7 +143,7 @@ select {
 }
 
 /* media queries which will only be activated at specific screen sizes */
-@media (max-width: 800px) {
+@media (max-width: 500px) {
   #table-area td {
     font-size: 1em;
   }
@@ -195,38 +195,6 @@ select {
   }
 }
 
-/* keyframe animations which will be used to animate the title */
-@keyframes title {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    font-size: 7.5rem;
-    opacity: 1;
-  }
-}
-
-@keyframes smaller-title {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    font-size: 5.5rem;
-    opacity: 1;
-  }
-}
-
-@keyframes subtitle {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
 /* MappyStyles */
 #map {
   height: 50%;
@@ -278,4 +246,8 @@ a {
   -moz-box-shadow: 0 0 2px green;
   -webkit-box-shadow: 0 0 2px blue;
   box-shadow: 0 0 2px red;
+}
+
+h1 {
+  text-align: center;
 }
