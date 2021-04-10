@@ -28,7 +28,7 @@ app.config['DEBUG'] = True
 
 
 username = 'postgres'
-password = 'password'
+password = 'postgres'
 rds_connection_string = f"{username}:{password}@localhost:5432/Project-2"
 engine = create_engine(f'postgresql://{rds_connection_string}')
 
@@ -43,7 +43,7 @@ print(Base.classes.keys())
 
 # Save reference to the table
 cocktail_data = Base.classes.cocktail_data
-
+spirit_totals = Base.classes.spirit_totals
 
 #################################################
 # Flask Routes
@@ -72,20 +72,20 @@ def strdrink():
     # Query all drinks
 
     results = session.query(
-        cocktail_data.strDrink, cocktail_data.Drink_ABV, cocktail_data.strIngredient1).all()
+        cocktail_data.strdrink, cocktail_data.drink_abv, cocktail_data.stringredient1).all()
 
     session.close()
 
     # Create a dictionary from the row data and append to a list of all drinks
-    all_strDrink = []
-    for strDrink, Drink_ABV, strIngredient1 in results:
-        strDrink_dict = {}
-        strDrink_dict["strDrink"] = strDrink
-        strDrink_dict["Drink_ABV"] = Drink_ABV
-        strDrink_dict["strIngredient1"] = strIngredient1
-        all_strDrink.append(strDrink_dict)
+    all_strdrink = []
+    for strdrink, drink_abv, stringredient1 in results:
+        strdrink_dict = {}
+        strdrink_dict["strdrink"] = strdrink
+        strdrink_dict["drink_abv"] = drink_abv
+        strdrink_dict["stringredient1"] = stringredient1
+        all_strdrink.append(strdrink_dict)
 
-    return jsonify(all_strDrink)
+    return jsonify(all_strdrink)
 
 # ---------add to latest app.py on repo--------------
 

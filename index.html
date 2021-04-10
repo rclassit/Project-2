@@ -130,11 +130,11 @@
         <!--BAC Output-->
         <div class = "container">
           <div class = "row margin-top-50">
-                    <!-- Map appears here -->
+                    <!-- Plot appears here -->
           <div class="col-md-6">
+            <div id="plot"></div>
+            <script src="plot.js"></script>
             <div id="panel"></div>
-            <div id="map"></div>
-              <iframe id="map-iframe" src="Bus_stop.html" width="500" height="400"></iframe>
            </div>
         <div class ="container">
             <div class="col-md-6">
@@ -164,9 +164,9 @@
       </div>
 
 
-
+      <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js"></script>
-      <script src="bac_calc.js"></script>
+      <script src="bac_calculation.js"></script>
       <!--New Library (AniJS) scripts (also added stuff to style CSS)-->
       <!-- AniJS core library -->
       <script src="https://anijs.github.io/lib/anijs/anijs-min.js"></script> 

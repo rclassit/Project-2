@@ -13,7 +13,7 @@ function solveBAC(form) {
     
     //filter out drink info from json
     d3.json(url, function(drinks) {
-      var filteredData = drinks.filter(drink => drink.strDrink.toUpperCase() === drinkInput.toUpperCase());
+      var filteredData = drinks.filter(drink => drink.strdrink.toUpperCase() === drinkInput.toUpperCase());
       console.log(filteredData);
 
       //check to see if drink is in database
@@ -21,7 +21,7 @@ function solveBAC(form) {
         alert("Sorry, that drink is not in our database.\nAre you drunk?\nTry something else!")}
       else{        
     // grab ABV from data 
-    var drinkABV = filteredData.map(drink => drink.Drink_ABV);
+    var drinkABV = filteredData.map(drink => drink.drink_abv);
     var ABVOutput = d3.select("#ABVOutput");
     // put ABV in output table
     ABVOutput.text(drinkABV+ "%");
@@ -47,7 +47,7 @@ function solveBAC(form) {
     //console.log(drinkImage);
 
     //grab first ingredient from data
-    var drinkLiquor = filteredData.map(drink => drink.strIngredient1);
+    var drinkLiquor = filteredData.map(drink => drink.stringredient1);
     var LiquorOutput = d3.select("#LiquorOutput");
     LiquorOutput.text(drinkLiquor);
    
