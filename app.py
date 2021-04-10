@@ -70,7 +70,7 @@ def strdrink():
 
     return jsonify(all_strdrink)
 
-# ---------add too latest app.py on repo--------------
+# ---------add to latest app.py on repo--------------
 
 # FOR CALLING SPIRIT TOTAL    
 @app.route("/api/v1.0/spirit_total")
@@ -93,7 +93,7 @@ def spirit_total():
 
     return jsonify(all_spirit_total)
 
-# ---------add too latest app.py on repo--------------
+# ---------add to latest app.py on repo--------------
 
 # @app.route("/api/v1.0/strdrink")
 # def strdrink():
