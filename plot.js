@@ -5,6 +5,26 @@
 // 3. RETURNS IN JSON FORMAT
 // DON'T FORGET TO ADD PLOTLY CODE TO THE INDEX.HTML
 
+// ADD THIS CODE TO index
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//     <meta charset="UTF-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+//     <title>Basic Charts</title>
+//     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+// </head>
+// <body>
+//     <div id="plot"></div>
+//     <script src="plot.js"></script>
+// </body>
+// </html>
+
+
+// PLOT CODE
+
+
 var trace1 = {
   y: spirit_total.spirit,
   name: "spirit",
