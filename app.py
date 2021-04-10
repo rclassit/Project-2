@@ -78,9 +78,7 @@ def spirit_total():
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
-    """Return a list of drink data including the drink, abv, and firstingredient of each drink"""
-    # Query all drinks
-   
+  
     results = session.query(spirit_total.spirit, spirit_total.total).all()
 
     session.close()
