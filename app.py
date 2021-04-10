@@ -91,13 +91,11 @@ def strdrink():
 
 # FOR CALLING SPIRIT TOTAL    
 @app.route("/api/v1.0/spirit_totals")
-def spirit_totals():
+def get_spirit_totals():
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
-    """Return a list of drink data including the drink, abv, and firstingredient of each drink"""
-    # Query all drinks
-   
+     
     results = session.query(spirit_totals.spirit, spirit_totals.total).all()
 
     session.close()
