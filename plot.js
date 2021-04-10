@@ -5,6 +5,8 @@
 // 3. RETURNS IN JSON FORMAT
 // DON'T FORGET TO ADD PLOTLY CODE TO THE INDEX.HTML
 
+
+
 // ADD THIS CODE TO index
 // <!DOCTYPE html>
 // <html lang="en">
@@ -21,19 +23,25 @@
 // </body>
 // </html>
 
+url ="http://localhost:5000/api/v1.0/spirit_totals"
+    //filter out drink info from json
+    d3.json(url, function(totals) {
+    
+      var data = totals.spirit
+      var data2 = totals.totals
+      
+
 
 // PLOT CODE
-
-
 var trace1 = {
-  y: spirit_total.spirit,
+  y: data,
   name: "spirit",
   type: "pie"
  
 };
 
 var trace2 = {
-  y: spirit_total.Total,
+  y: data2,
   name: "Total",
   type: "pie"
  
