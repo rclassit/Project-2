@@ -8,6 +8,7 @@ import psycopg2
 from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
 
+
 # Create an instance of Flask
 app = Flask(__name__)
 CORS(app, resources={
@@ -61,22 +62,30 @@ def index():
     
     return ("index.html")
 
-
-@app.route("/api/v1.0/strdrink/")
+# route to return data for bac calculator
+@app.route("/api/v1.0/strdrink")
 def strdrink():
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
-    """Return a list of all drink names"""
+    """Return a list of drink data including the drink, abv, and firstingredient of each drink"""
     # Query all drinks
-    results = session.query(cocktail_data.strdrink).all()
+
+    results = session.query(
+        cocktail_data.strDrink, cocktail_data.Drink_ABV, cocktail_data.strIngredient1).all()
 
     session.close()
 
-    # Convert list of tuples into normal list
-    all_strdrink = list(np.ravel(results))
+    # Create a dictionary from the row data and append to a list of all drinks
+    all_strDrink = []
+    for strDrink, Drink_ABV, strIngredient1 in results:
+        strDrink_dict = {}
+        strDrink_dict["strDrink"] = strDrink
+        strDrink_dict["Drink_ABV"] = Drink_ABV
+        strDrink_dict["strIngredient1"] = strIngredient1
+        all_strDrink.append(strDrink_dict)
 
-    return jsonify(all_strdrink)
+    return jsonify(all_strDrink)
 
 # ---------add to latest app.py on repo--------------
 
@@ -103,30 +112,7 @@ def spirit_totals():
 
     return jsonify(all_spirit_totals)
 
-# ---------add to latest app.py on repo--------------
 
-# @app.route("/api/v1.0/strdrink")
-# def strdrink():
-#     # Create our session (link) from Python to the DB
-#     session = Session(engine)
-
-#     """Return a list of drink data including the drink, abv, and firstingredient of each drink"""
-#     # Query all drinks
-   
-#     results = session.query(cocktail_data.strdrink, cocktail_data.drink_abv, cocktail_data.stringredient1).all()
-
-#     session.close()
-
-#     # Create a dictionary from the row data and append to a list of all drinks
-#     all_strdrink = []
-#     for strdrink, drink_abv, stringredient1 in results:
-#         strdrink_dict = {}
-#         strdrink_dict["strdrink"] = strdrink
-#         strdrink_dict["drink_abv"] = drink_abv
-#         strdrink_dict["stringredient1"] = stringredient1
-#         all_strdrink.append(strdrink_dict)
-
-#     return jsonify(all_strdrink)
 
 
 if __name__ == '__main__':
