@@ -6,7 +6,18 @@ from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
 import psycopg2 
 from flask import Flask, jsonify, request
-# from flask_cors import CORS
+from flask_cors import CORS, cross_origin
+
+# Create an instance of Flask
+app = Flask(__name__)
+CORS(app, resources={
+    r"/*": {
+        "origins": "*"
+    }
+})
+app.config['CORS_HEADERS'] = 'Content-Type'
+app.config['CORS_ORIGINS'] = '*'
+app.config['DEBUG'] = True
 
 
 #################################################
@@ -17,7 +28,7 @@ from flask import Flask, jsonify, request
 
 username = 'postgres'
 password = 'password'
-rds_connection_string = f"{username}:{password}@localhost:5432/drinks"
+rds_connection_string = f"{username}:{password}@localhost:5432/Project-2"
 engine = create_engine(f'postgresql://{rds_connection_string}')
 
 
@@ -27,13 +38,10 @@ Base = automap_base()
 # reflect the tables
 Base.prepare(engine, reflect=True)
 
+print(Base.classes.keys())
+
 # Save reference to the table
 cocktail_data = Base.classes.cocktail_data
-
-#################################################
-# Flask Setup
-#################################################
-app = Flask(__name__)
 
 
 #################################################
