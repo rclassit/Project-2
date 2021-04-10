@@ -8,12 +8,18 @@ function solveBAC(form) {
     drinkOutput.text(drinkInput);
 
     //filter out drink info from csv
-    //will change to d3.json to grab data
-    //define url = "localhost:50000/cocktail_data 
-    d3.csv("cocktail_data_with_img.csv", function(drinks){
+    //define url to grab data
+    url ="http://localhost:5000/api/v1.0/strdrink"
+    
+    //filter out drink info from json
+    d3.json(url, function(drinks) {
       var filteredData = drinks.filter(drink => drink.strDrink.toUpperCase() === drinkInput.toUpperCase());
-      
-      console.log(filteredData)
+      console.log(filteredData);
+
+      //check to see if drink is in database
+      if (filteredData==0){
+        alert("Sorry, that drink is not in our database.\nAre you drunk?\nTry something else!")}
+      else{        
     // grab ABV from data 
     var drinkABV = filteredData.map(drink => drink.Drink_ABV);
     var ABVOutput = d3.select("#ABVOutput");
@@ -131,7 +137,7 @@ function solveBAC(form) {
 
     // write results into output table
     messageElement.text(message);
-    bacamountElement.text(result + "%"); });}
+    bacamountElement.text(result + "%");};})}
   
   // https://awareawakealive.org/educate/blood-alcohol-content
   //https://www.teamdui.com/bac-widmarks-formula/#:~:text=BAC%20Calc%20Formula%20Widmark&text=To%20find%20A%20in%20the,%25%20alcohol%2C%20so%20it%20contains%20
