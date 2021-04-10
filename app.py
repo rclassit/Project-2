@@ -81,25 +81,27 @@ def strdrink():
 # ---------add to latest app.py on repo--------------
 
 # FOR CALLING SPIRIT TOTAL    
-@app.route("/api/v1.0/spirit_total")
-def spirit_total():
+@app.route("/api/v1.0/spirit_totals")
+def spirit_totals():
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
-  
-    results = session.query(spirit_total.spirit, spirit_total.total).all()
+    """Return a list of drink data including the drink, abv, and firstingredient of each drink"""
+    # Query all drinks
+   
+    results = session.query(spirit_totals.spirit, spirit_totals.total).all()
 
     session.close()
 
     # Create a dictionary from the row data and append to a list of all drinks
-    all_spirit_total = []
+    all_spirit_totals = []
     for spirit, total in results:
-        spirit_total_dict = {}
-        spirit_total_dict["spirit"] = spirit
-        spirit_total_dict["total"] = total
-        all_spirit_total.append(spirit_total_dict)
+        spirit_totals_dict = {}
+        spirit_totals_dict["spirit"] = spirit
+        spirit_totals_dict["total"] = total
+        all_spirit_totals.append(spirit_totals_dict)
 
-    return jsonify(all_spirit_total)
+    return jsonify(all_spirit_totals)
 
 # ---------add to latest app.py on repo--------------
 
