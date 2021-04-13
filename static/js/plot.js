@@ -9,7 +9,7 @@
 
 
 
-  var url ="http://localhost:5000/api/v1.0/spirit_totals";
+  url ="http://localhost:5000/api/v1.0/spirit_totals"
   d3.json(url, function(data) { 
     console.log(data);
 
