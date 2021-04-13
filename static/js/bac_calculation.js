@@ -72,7 +72,8 @@ function solveBAC(form) {
     console.log(result);
     
     //define map variable for loop
-    bars_var = "Bars.html"  
+    var bars_var = "../html/Bars.html" 
+    var bus_var = "../html/Bus_stop.html" 
     
     // if else statement bac result comparison to known alcohol effects + gif + map
     
@@ -117,13 +118,13 @@ function solveBAC(form) {
      else if (result == 0.08){
         message = "In MOST and possibly ALL states you would be considered intoxicated and arrested for DUI.";
         image.src = "https://media.giphy.com/media/yoJC2NUmw6fFWD6E6I/giphy.gif";
-        iframe.src = "Bus_stop.html";
+        iframe.src = bus_var;
       }
 
      else if (result > 0.08) {
         message = "Go home, you're drunk.";
         image.src = "https://media.giphy.com/media/FJhQGaCZeumAw/giphy.gif";
-        iframe.src = "Bus_stop.html";
+        iframe.src = bus_var;
         //console.log(result);
       }
 
@@ -131,7 +132,7 @@ function solveBAC(form) {
         //Set these to some default value
         message = "Something went wrong. Please try again.";
         image.src = "https://media.giphy.com/media/11NDdTESUQRkeQ/giphy.gif";
-        iframe.src = "Bars.html";
+        iframe.src = bus_var;
         //console.log(result);
       }
 
