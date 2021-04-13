@@ -60,7 +60,7 @@ spirit_totals = Base.classes.spirit_totals
 @app.route("/")
 def index():
     
-    return ("index.html")
+    return render_template("index.html")
 
 # route to return data for bac calculator
 @app.route("/api/v1.0/strdrink")
