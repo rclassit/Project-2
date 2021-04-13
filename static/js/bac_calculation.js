@@ -72,8 +72,8 @@ function solveBAC(form) {
     console.log(result);
     
     //define map variable for loop
-    var bars_var = "../html/Bars.html" 
-    var bus_var = "../html/Bus_stop.html" 
+    var bars_var = "../static/html/Bars.html" 
+    var bus_var = "../static/html/Bus_stop.html" 
     
     // if else statement bac result comparison to known alcohol effects + gif + map
     
