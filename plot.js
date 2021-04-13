@@ -7,32 +7,10 @@
 
 
 
-// ADD THIS CODE TO index
-// <!DOCTYPE html>
-// <html lang="en">
-// <head>
-//     <meta charset="UTF-8">
-//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-//     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-//     <title>Basic Charts</title>
-//     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-// </head>
-// <body>
-//     <div id="plot"></div>
-//     <script src="plot.js"></script>
-// </body>
-// </html>
 
-var url =`localhost:5000/api/v1.0/spirit_totals`;
 
-// function unpack(rows, index) {
-//   return rows.map(function(row) {
-//     return row[index];
-//   });
-// }cx
-
-function buildPlot() {
-  d3.json(url), function(data) { 
+  var url ="http://localhost:5000/api/v1.0/spirit_totals";
+  d3.json(url, function(data) { 
     console.log(data);
 
     var s_array = []
@@ -46,38 +24,44 @@ function buildPlot() {
         t_array.push(s_dict["total"])
       }
       
-    var spirit = s_array;
-    var totals = t_array;
+    // var spirit = s_array;
+    // var totals = t_array;
+    
       
     var trace1 = {
-      x: totals,
-      y: spirit,
+      values: t_array,
+      labels: s_array,
       type: "pie"
       
     };
 
     var data = [trace1];
 
-    // var layout = {
-    //   height: 400,
-    //   width: 500
-    //   };
-    
     var layout = {
+      
       title: "Cocktail Spirit Totals",
-      xaxis: { 
-        range: [0,100],
-        type: "number"
-    },
-      yaxis: {
-        autorange: true,
-        type: "linear"
-    }
-  };
-
-    Plotly.newPlot("plot", data, layout);
+      height: 400,
+      width: 550,
+      plot_bgcolor:'rgba(0,0,0,0)',
+      paper_bgcolor:'rgba(0,0,0,0)',
+      font: {
+        color: 'ffffff'
+      }
+      };
+    
+    // var layout = {
+    //   title: "Cocktail Spirit Totals",
+    //   xaxis: { 
+    //     range: [0,100],
+    //     type: "number"
+    // },
+    //   yaxis: {
+    //     autorange: true,
+    //     type: "linear"
+    // }
+  Plotly.newPlot("plot", data, layout);
+  });
+ 
   
-  
+ 
 
-};
-buildPlot();
